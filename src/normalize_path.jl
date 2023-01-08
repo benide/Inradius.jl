@@ -1,8 +1,10 @@
 # Normalizing means moving the path so that the largest sphere in its
 # convex hull is centered at the origin, scaling the path to inradius
-# 1, rotating so that the first point on the path is at [1,0,h] for
-# some value h, and reflecting so that the first turn goes around the
-# z-axis counter-clockwise when viewed from above.
+# 1, rotating so that the first point on the path is at [x,0,z] and
+# the last point is at [x,0,-z] for some positive x and z, and
+# reflecting so that the first turn (determined by the first and
+# second points) goes around the z-axis counter-clockwise when viewed
+# from above.
 
 # For open paths, the mathematical description leads fairly directly
 # to an algorithm. For closed, there is no "starting point"
