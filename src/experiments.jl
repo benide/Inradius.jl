@@ -5,12 +5,13 @@ function experiment(N = 10, runs = 5,
     xs = [copy(x) for i in 1:Threads.nthreads()]
     best = [copy(x) for i in 1:Threads.nthreads()]
     dxs = [similar(x) for i in 1:Threads.nthreads()]
-    Threads.@threads for run in 1:runs
-        thread = Threads.threadid()
-        perturb_path!(dxs[thread], xs[thread], dLR!, proj!, diff_str, diff_time, diff_dt)
-        local_minimum!(dxs[thread], xs[thread], LR, dLR!, proj!, iterations = local_min_iters)
-        if L(xs[thread]) < L(best[thread])
-            best[thread] .= xs[thread]
+    Threads.@threads for thread in 1:Threads.nthreads()
+        for run in 1:runs
+            perturb_path!(dxs[thread], xs[thread], dLR!, proj!, diff_str, diff_time, diff_dt)
+            local_minimum!(dxs[thread], xs[thread], LR, dLR!, proj!, iterations = local_min_iters)
+            if L(xs[thread]) < L(best[thread])
+                best[thread] .= xs[thread]
+            end
         end
     end
     best[argmin(L.(best))]
@@ -23,12 +24,13 @@ function experimentc(N = 10, runs = 5,
     xs = [copy(x) for i in 1:Threads.nthreads()]
     best = [copy(x) for i in 1:Threads.nthreads()]
     dxs = [similar(x) for i in 1:Threads.nthreads()]
-    Threads.@threads for run in 1:runs
-        thread = Threads.threadid()
-        perturb_path!(dxs[thread], xs[thread], dLcR!, proj!, diff_str, diff_time, diff_dt)
-        local_minimum!(dxs[thread], xs[thread], LcR, dLcR!, proj!, iterations = local_min_iters)
-        if Lc(xs[thread]) < Lc(best[thread])
-            best[thread] .= xs[thread]
+    Threads.@threads for thread in 1:Threads.nthreads()
+        for run in 1:runs
+            perturb_path!(dxs[thread], xs[thread], dLcR!, proj!, diff_str, diff_time, diff_dt)
+            local_minimum!(dxs[thread], xs[thread], LcR, dLcR!, proj!, iterations = local_min_iters)
+            if Lc(xs[thread]) < Lc(best[thread])
+                best[thread] .= xs[thread]
+            end
         end
     end
     best[argmin(Lc.(best))]
