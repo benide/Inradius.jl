@@ -50,7 +50,15 @@ path = experiment(8, 10, x = path)
 
 We can see that we improved slightly be continuing.
 
-* References
+** Short explanation
+
+I consider the space of paths defined by a finite list of points that are connected via line segments. For $N$ points, call the space of such paths $\Omega_N$. The set of paths $\displaystyle \bigcup_{N=1}^{\infty}\Omega_N$ is dense in the space of all finite length paths, so this is a good discretization to use. Store those paths as $3 \times N$ matrices where columns represent the points.
+
+Because of the paths being defined by points connected by line segments, the convex hull of the path is also the convex hull of the defining points. Finding the convex hull of a point cloud is a well understood problem. From there, I use linear programming to solve the Chebyshev problem which gives the center and radius of the largest sphere in the convex hull.
+
+Now that we have the types of paths we're interested in and a way to calculate their inradii, I use global optimization by intermittent diffusion to find the optimum for a fixed number of points $N$. Do this for an increasing value $N$ and see if it's converging. My thesis shows that this appears to converge quadratically both for the Zalgaller conjecture for open paths and for the known solution for closed paths.
+
+** References
 
 1. Ghomi, M., & Wenk, J. (2021). Shortest closed curve to inspect a sphere. Journal für die reine und angewandte Mathematik. http://dx.doi.org/10.1515/crelle-2021-0049
 2. Zalgaller, V. A. (2005). Shortest inspection curves for the sphere. Journal of Mathematical Sciences, 131(1), 5307–5320. http://dx.doi.org/10.1007/s10958-005-0403-9
