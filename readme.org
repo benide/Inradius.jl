@@ -48,7 +48,7 @@ path = experiment(8, 10, x = path)
 : L(path) = 10.125103047486645
 : R(path) = 1.0000000000000002
 
-We can see that we improved slightly be continuing.
+We can see that we improved slightly by continuing.
 
 ** Short explanation
 
