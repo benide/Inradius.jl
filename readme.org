@@ -39,14 +39,14 @@ then show the resulting length and inradius of the best path that has been found
 
 We can start from this path if we want to continue to try and improve on the result:
 
-#+begin_src julia
+#+begin_src julia :exports both
 path = experiment(8, 10, x = path)
 @show L(path); @show R(path);
 #+end_src
 
 #+RESULTS:
-: L(x) = 10.125103047486645
-: R(x) = 1.0000000000000002
+: L(path) = 10.125103047486645
+: R(path) = 1.0000000000000002
 
 We can see that we improved slightly be continuing.
 
