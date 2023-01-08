@@ -1,0 +1,49 @@
+* Inradius.jl
+
+The inradius of a curve is the radius of the largest sphere that lies inside of the curve's convex hull. A long standing question has been: What is the shortest curve in $\mathbb R^3$ of inradius 1? This was recently solved for closed curves[fn::Ghomi, M., & Wenk, J. (2021). Shortest closed curve to inspect a sphere. Journal für die reine und angewandte Mathematik. http://dx.doi.org/10.1515/crelle-2021-0049]. For open curves this is still unsolved, however a conjecture from 2005 by Zalgaller still remains unbeaten[fn::Zalgaller, V. A. (2005). Shortest inspection curves for the sphere. Journal of Mathematical Sciences, 131(1), 5307–5320. http://dx.doi.org/10.1007/s10958-005-0403-9].
+
+I used this code in my PhD thesis[fn::See chapter 6 for the inradius problem, and section 6.3 specifically for the results [[https://smartech.gatech.edu/handle/1853/67205][in my thesis here]]] to provide numerical evidence that the Zalgaller conjecture is correct. I used the known solution for the closed curve to validate this method.
+
+** Example
+
+Starting from the root folder of this repository, load the module via:
+
+#+begin_src julia
+import Pkg; Pkg.activate(".")
+include("src/Inradius.jl"); using .Inradius
+#+end_src
+
+#+RESULTS:
+
+To start from a random path defined by 8 points and go through 10 rounds of intermittent diffusion for each thread Julia is provided:
+
+#+begin_src julia :exports both
+path = experiment(8, 10)
+#+end_src
+
+#+RESULTS:
+: 3×8 Matrix{Float64}:
+:   2.27767    0.426928  -0.587716  -0.697645  -0.240687   0.21088  -0.136078  -1.60925
+:  -0.923406  -1.4633    -1.20104   -0.277841   0.661854   1.35928   1.37428    0.68166
+:   0.321616   0.263964  -0.560367  -1.47404   -1.48406   -0.51342   0.77313    1.77003
+
+then show the resulting length and inradius of the best path that has been found:
+
+#+begin_src julia :exports both
+@show L(path); @show R(path);
+#+end_src
+
+#+RESULTS:
+: L(path) = 10.129714236946846
+: R(path) = 1.0
+
+We can start from this path if we want to continue to try and improve on the result:
+
+#+begin_src julia
+path = experiment(8, 10, x = path)
+@show L(path); @show R(path);
+#+end_src
+
+#+RESULTS:
+: L(x) = 10.125103047486645
+: R(x) = 1.0000000000000002
