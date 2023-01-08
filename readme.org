@@ -1,8 +1,8 @@
 * Inradius.jl
 
-The inradius of a curve is the radius of the largest sphere that lies inside of the curve's convex hull. A long standing question has been: What is the shortest curve in $\mathbb R^3$ of inradius 1? This was recently solved for closed curves[fn::Ghomi, M., & Wenk, J. (2021). Shortest closed curve to inspect a sphere. Journal für die reine und angewandte Mathematik. http://dx.doi.org/10.1515/crelle-2021-0049]. For open curves this is still unsolved, however a conjecture from 2005 by Zalgaller still remains unbeaten[fn::Zalgaller, V. A. (2005). Shortest inspection curves for the sphere. Journal of Mathematical Sciences, 131(1), 5307–5320. http://dx.doi.org/10.1007/s10958-005-0403-9].
+The inradius of a curve is the radius of the largest sphere that lies inside of the curve's convex hull. A long standing question has been: What is the shortest curve in $\mathbb R^3$ of inradius 1? This was recently solved for closed curves (see reference 1). For open curves this is still unsolved, however a conjecture from 2005 by Zalgaller still remains unbeaten (see reference 2).
 
-I used this code in my PhD thesis[fn::See chapter 6 for the inradius problem, and section 6.3 specifically for the results [[https://smartech.gatech.edu/handle/1853/67205][in my thesis here]]] to provide numerical evidence that the Zalgaller conjecture is correct. I used the known solution for the closed curve to validate this method.
+I used this code in my PhD thesis (see reference 3) to provide numerical evidence that the Zalgaller conjecture is correct. I used the known solution for the closed curve to validate this method.
 
 ** Example
 
@@ -47,3 +47,11 @@ path = experiment(8, 10, x = path)
 #+RESULTS:
 : L(x) = 10.125103047486645
 : R(x) = 1.0000000000000002
+
+We can see that we improved slightly be continuing.
+
+* References
+
+1. Ghomi, M., & Wenk, J. (2021). Shortest closed curve to inspect a sphere. Journal für die reine und angewandte Mathematik. http://dx.doi.org/10.1515/crelle-2021-0049
+2. Zalgaller, V. A. (2005). Shortest inspection curves for the sphere. Journal of Mathematical Sciences, 131(1), 5307–5320. http://dx.doi.org/10.1007/s10958-005-0403-9
+3. See chapter 6 for the inradius problem, and section 6.3 specifically for the results [[https://smartech.gatech.edu/handle/1853/67205][in my thesis here]]
